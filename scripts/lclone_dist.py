@@ -8,9 +8,9 @@ from collections import Counter
 import numpy as np
 import openpyxl
 
-D = "data/capitis定序後重整之資料"
-XLSX = D + "/ridom/Scapitis_620_cgMLST_2026.xlsx"
-CLUST = D + "/投稿用/上傳到github/wang2022_cgmlst_clusters_602.csv"
+D = "data"
+XLSX = D + "/Scapitis_620_cgMLST_2026.xlsx"
+CLUST = D + "/wang2022_cgmlst_clusters_602.csv"
 ANCHOR = "GCA_000712995.1"
 
 
