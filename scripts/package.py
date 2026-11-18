@@ -22,7 +22,8 @@ T3=pd.DataFrame({"Measure":["Lineage genomes","Non-lineage genomes","Marker carr
 T4=pd.DataFrame({"Collection":["Discovery","External"],"ST3 genomes":[38,27],
                  "Carrying the marker allele":["12 (31.6%)","1 (3.7%)"],
                  "Carrying the common ST3 allele":[21,22]})
-S1=pd.DataFrame({"Stage":["NCBI census, all releases","Released 2023 onward",
+S1=pd.read_csv("results/tables/table_s1_accessions.csv", dtype=str).fillna("")
+FIG1=pd.DataFrame({"Stage":["NCBI census, all releases","Released 2023 onward",
                           "One record per genome, RefSeq copy kept",
                           "Independence and quality filters passed",
                           "Discovery outgroup removed on review"],
@@ -46,11 +47,13 @@ TITLES={"Table 1":"Table 1. Specificity of the 1,346 candidate targets in the di
  "Table 2":"Table 2. External false positives by discovery specificity band",
  "Table 3":"Table 3. ftsZ marker performance across both collections and both gold standards. Values are percentages with Wilson score 95% confidence intervals.",
  "Table 4":"Table 4. Marker-allele carriage among seven-locus ST3 genomes in the two collections",
- "Table S1":"Supplementary Table S1. Selection of the external genome collection. Quality thresholds: total length 2.2–2.9 Mb; contig N50 ≥ 20 kb; ≤ 300 contigs; CheckM completeness ≥ 90%; CheckM contamination ≤ 5%; NCBI ANI ≥ 95% to S. capitis.",
+ "Table S1":"Supplementary Table S1. GenBank and RefSeq accession numbers for the 620 discovery genomes and the 301 external genomes, with the published cgMLST cluster label where one exists and the seven-locus MLST sequence type.",
+ "Figure 1 source data":"Figure 1 source data. Selection of the external genome collection. Quality thresholds: total length 2.2–2.9 Mb; contig N50 ≥ 20 kb; ≤ 300 contigs; CheckM completeness ≥ 90%; CheckM contamination ≤ 5%; NCBI ANI ≥ 95% to S. capitis.",
  "Table S2":"Supplementary Table S2. External genomes found profile-identical to a discovery genome across the 1,492 shared cgMLST targets",
  "Table S3":"Supplementary Table S3. The 26 candidate targets with no false positive in the discovery collection, and their performance in the external collection"}
 SHEETS=[("Table 1",T1),("Table 2",T2),("Table 3",T3),("Table 4",T4),
-        ("Table S1",S1),("Table S2",S2),("Table S3",S3)]
+        ("Table S1",S1),("Table S2",S2),("Table S3",S3),
+        ("Figure 1 source data",FIG1)]
 
 wb=Workbook(); wb.remove(wb.active)
 hdr_f=Font(bold=True, color="FFFFFF"); hdr_fill=PatternFill("solid", fgColor="4F6D8C")

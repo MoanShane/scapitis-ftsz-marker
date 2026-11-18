@@ -54,6 +54,7 @@ python3 scripts/fig3b.py
 
 echo "== 12. tables, legends and submission package"
 python3 scripts/legends.py
+python3 scripts/table_s1.py        "$X" "$M" "$C"
 python3 scripts/package.py
 
 echo
