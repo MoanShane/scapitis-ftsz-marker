@@ -52,7 +52,10 @@ python3 scripts/fig1.py
 python3 scripts/fig2.py
 python3 scripts/fig3b.py
 
-echo "== 12. tables, legends and submission package"
+echo "== 12. interactive view (Microreact inputs)"
+python3 scripts/microreact.py        "$X" "$M" "$C"
+
+echo "== 13. tables, legends and submission package"
 python3 scripts/legends.py
 python3 scripts/table_s1.py        "$X" "$M" "$C"
 python3 scripts/package.py
