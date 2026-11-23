@@ -1,0 +1,43 @@
+{
+  "upload_type": "software",
+  "title": "scapitis-ftsz-marker: analysis code and derived data for single cgMLST target alleles identifying the linezolid-resistant Staphylococcus capitis L-clone",
+  "creators": [
+    {
+      "name": "Tsai, Moan-Shane",
+      "affiliation": "Yuan's General Hospital, Kaohsiung, Taiwan",
+      "orcid": "0000-0001-5774-1836"
+    },
+    {
+      "name": "Yang, Tzu-Ling",
+      "affiliation": "Yuan's General Hospital, Kaohsiung, Taiwan"
+    }
+  ],
+  "description": "<p>Analysis code and derived data for a study screening all 1,492 targets of the <i>Staphylococcus capitis</i> cgMLST scheme for alleles that mark the linezolid-resistant L-clone, and testing every candidate marker in an independent collection of 301 genomes deposited later.</p><p>The archive contains the screening, distance, marker-recovery and figure scripts, the cgMLST and seven-locus allele calls for all 921 genomes, the derived distance and performance tables, the extracted <i>ftsZ</i> coding sequences, the main and supplementary tables, the three figures, and the input files for the accompanying Microreact view.</p><p>Licensing is split: the code (scripts/ and run_all.sh) is released under the MIT License; the data and derived result files (data/ and results/) are released under CC BY 4.0. See LICENSE and LICENSE-DATA in the archive.</p><p>Allele definitions of the cgMLST and seven-locus schemes are curated and distributed by Ridom within MBioSEQ Ridom Typer and are available to licensed users of the software; they are not redistributed here. Only the allele calls for the genomes analysed in this study are included.</p><p>The de novo assemblies of the 485 discovery genomes available only as sequencing reads are deposited separately (doi:10.5281/zenodo.24453130).</p>",
+  "license": "mit",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "Staphylococcus capitis",
+    "cgMLST",
+    "linezolid resistance",
+    "molecular typing",
+    "external validation",
+    "positive predictive value",
+    "ftsZ",
+    "comparative genomics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.24453130",
+      "relation": "isSupplementedBy",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1038/s41467-022-31908-x",
+      "relation": "isDerivedFrom",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    }
+  ]
+}
