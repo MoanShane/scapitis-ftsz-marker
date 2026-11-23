@@ -80,5 +80,13 @@ numbering between schemes.
 
 ## License
 
-Not yet chosen. Until a license file is added, no permissions beyond viewing
-are granted.
+Split by content type:
+
+- **Code** (`scripts/`, `run_all.sh`) — MIT License. See `LICENSE`.
+- **Data and derived results** (`data/`, `results/`) — Creative Commons
+  Attribution 4.0 International (CC BY 4.0). See `LICENSE-DATA`.
+
+The allele definitions of the cgMLST and seven-locus schemes are curated and
+distributed by Ridom within MBioSEQ Ridom Typer and are available to licensed
+users of the software; they are not redistributed here. Only the allele calls
+for the genomes analysed in this study are included.

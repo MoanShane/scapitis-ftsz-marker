@@ -1,0 +1,44 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Moan-Shane Tsai, Tzu-Ling Yang
+
+The data and derived result files in this repository -- everything under
+data/ and results/ -- are licensed under the Creative Commons Attribution 4.0
+International licence.
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the licence, and
+indicate if changes were made.
+
+Full licence text:  https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary:  https://creativecommons.org/licenses/by/4.0/
+
+Attribution
+-----------
+Tsai M-S, Yang T-L. scapitis-ftsz-marker: analysis code and derived data for
+single cgMLST target alleles identifying the linezolid-resistant
+Staphylococcus capitis L-clone. https://github.com/MoanShane/scapitis-ftsz-marker
+
+Provenance of the underlying material
+-------------------------------------
+These files are derived from publicly available records and publications and
+are not original sequence data:
+
+  - Genome assemblies and sequencing reads were obtained from the NCBI
+    Assembly database and the NCBI Sequence Read Archive. Accession numbers
+    for all 921 genomes are listed in results/tables/table_s1_accessions.csv.
+
+  - Published cgMLST cluster labels (wang2022_cgmlst_clusters_602.csv) are
+    taken from the supplementary material of Wang Z, Gu C, Sun L, Zhao F,
+    Fu Y, Di L, et al. Development of a novel core genome MLST scheme for
+    tracing multidrug resistant Staphylococcus capitis. Nat Commun
+    2022;13:4254. doi:10.1038/s41467-022-31908-x
+
+  - cgMLST and seven-locus allele calls were produced with MBioSEQ Ridom
+    Typer. The allele definitions of those schemes are curated and
+    distributed by Ridom and are available to licensed users of the software;
+    they are not redistributed here. Only the allele calls for the genomes
+    analysed in this study are included.
+
+The code in this repository is licensed separately under the MIT License.
+See LICENSE.
