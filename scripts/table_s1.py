@@ -4,7 +4,7 @@ Usage:
     python3 scripts/table_s1.py <620_cgMLST.xlsx> <external_merged.csv> <clusters_602.csv>
 
 Writes results/tables/table_s1_accessions.csv, which package.py turns into the
-"Table S1" sheet of Tables_1-4_and_S1-S3.xlsx.
+"Table S1" sheet of Tables_1-3_and_S1-S3.xlsx.
 
 The external collection is selected exactly as extscan.py selects it, so the
 table lists the same 301 genomes the analysis used.

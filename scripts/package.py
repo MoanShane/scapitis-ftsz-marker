@@ -6,20 +6,24 @@ from openpyxl.utils import get_column_letter
 PK="results/package"; shutil.rmtree(PK, ignore_errors=True)
 os.makedirs(f"{PK}/figures", exist_ok=True)
 
-T1=pd.DataFrame({"Non-lineage carriers (of 583)":["0","1–11","12–50","51–200","more than 200"],
+# Table 1 merges the former Tables 1 and 2: both were banded identically by the
+# number of non-lineage discovery genomes a candidate flagged, and both repeated
+# the same candidate counts (26/58/511/64/687).
+T1=pd.DataFrame({"Non-lineage carriers in discovery (of 583)":["0","1–11","12–50","51–200","more than 200"],
                  "Candidate targets":[26,58,511,64,687],
-                 "Share of the 1,346":["1.9%","4.3%","38.0%","4.8%","51.0%"]})
-T2=pd.DataFrame({"Non-lineage carriers in discovery":["0","1–11","12–50","51–200","more than 200"],
-                 "Candidates":[26,58,511,64,687],
+                 "Share of 1,346":["1.9%","4.3%","38.0%","4.8%","51.0%"],
                  "With no more than 2 external false positives":["26 (100%)","40 (69.0%)","2 (0.4%)","0","0"]})
-T3=pd.DataFrame({"Measure":["Lineage genomes","Non-lineage genomes","Marker carriers","False positives",
+# Table 2 was Table 3. The two n = 295 columns were dropped: they repeated the
+# n = 301 point estimates exactly and moved a single confidence bound
+# (specificity under the distance standard, 98.0% -> 97.9%), which the Results
+# text now states in one sentence.
+T2=pd.DataFrame({"Measure":["Lineage genomes","Non-lineage genomes","Marker carriers","False positives",
                             "Sensitivity","Specificity","Positive predictive value"],
   "Discovery, n = 602":[19,583,30,11,"100.0 (83.2–100.0)","98.1 (96.7–98.9)","63.3 (45.5–78.1)"],
   "ST6, n = 301":[22,279,24,2,"100.0 (85.1–100.0)","99.3 (97.4–99.8)","91.7 (74.2–97.7)"],
-  "≤ 50 alleles, n = 301":[23,278,24,1,"100.0 (85.7–100.0)","99.6 (98.0–99.9)","95.8 (79.8–99.3)"],
-  "ST6, n = 295":[22,273,24,2,"100.0 (85.1–100.0)","99.3 (97.4–99.8)","91.7 (74.2–97.7)"],
-  "≤ 50 alleles, n = 295":[23,272,24,1,"100.0 (85.7–100.0)","99.6 (97.9–99.9)","95.8 (79.8–99.3)"]})
-T4=pd.DataFrame({"Collection":["Discovery","External"],"ST3 genomes":[38,27],
+  "≤ 50 alleles, n = 301":[23,278,24,1,"100.0 (85.7–100.0)","99.6 (98.0–99.9)","95.8 (79.8–99.3)"]})
+# Table 3 was Table 4.
+T3=pd.DataFrame({"Collection":["Discovery","External"],"ST3 genomes":[38,27],
                  "Carrying the marker allele":["12 (31.6%)","1 (3.7%)"],
                  "Carrying the common ST3 allele":[21,22]})
 S1=pd.read_csv("results/tables/table_s1_accessions.csv", dtype=str).fillna("")
@@ -43,15 +47,14 @@ S3.columns=["cgMLST target","Allele","Discovery false positives","External true 
 S3=S3.sort_values(["External false negatives","cgMLST target"]).reset_index(drop=True)
 S3.insert(0,"#",range(1,len(S3)+1))
 
-TITLES={"Table 1":"Table 1. Specificity of the 1,346 candidate targets in the discovery collection",
- "Table 2":"Table 2. External false positives by discovery specificity band",
- "Table 3":"Table 3. ftsZ marker performance across both collections and both gold standards. Values are percentages with Wilson score 95% confidence intervals.",
- "Table 4":"Table 4. Marker-allele carriage among seven-locus ST3 genomes in the two collections",
+TITLES={"Table 1":"Table 1. Specificity of the 1,346 candidate targets in the discovery collection, and how many of each band reached no more than two false positives in the external collection",
+ "Table 2":"Table 2. ftsZ marker performance across both collections and both gold standards. Values are percentages with Wilson score 95% confidence intervals.",
+ "Table 3":"Table 3. Marker-allele carriage among seven-locus ST3 genomes in the two collections",
  "Table S1":"Supplementary Table S1. GenBank and RefSeq accession numbers for the 620 discovery genomes and the 301 external genomes, with the published cgMLST cluster label where one exists and the seven-locus MLST sequence type.",
  "Figure 1 source data":"Figure 1 source data. Selection of the external genome collection. Quality thresholds: total length 2.2–2.9 Mb; contig N50 ≥ 20 kb; ≤ 300 contigs; CheckM completeness ≥ 90%; CheckM contamination ≤ 5%; NCBI ANI ≥ 95% to S. capitis.",
  "Table S2":"Supplementary Table S2. External genomes found profile-identical to a discovery genome across the 1,492 shared cgMLST targets",
  "Table S3":"Supplementary Table S3. The 26 candidate targets with no false positive in the discovery collection, and their performance in the external collection"}
-SHEETS=[("Table 1",T1),("Table 2",T2),("Table 3",T3),("Table 4",T4),
+SHEETS=[("Table 1",T1),("Table 2",T2),("Table 3",T3),
         ("Table S1",S1),("Table S2",S2),("Table S3",S3),
         ("Figure 1 source data",FIG1)]
 
@@ -76,6 +79,6 @@ for name,df in SHEETS:
         w=max(len(str(c)), *(len(str(v)) for v in df.iloc[:,j-1])) + 3
         ws.column_dimensions[get_column_letter(j)].width=min(max(w,12), 52)
     ws.freeze_panes="A4"
-wb.save(f"{PK}/Tables_1-4_and_S1-S3.xlsx")
+wb.save(f"{PK}/Tables_1-3_and_S1-S3.xlsx")
 print("xlsx written:", [n for n,_ in SHEETS])
 print("S3 rows:", len(S3))
