@@ -2,12 +2,21 @@ import sys, re, pandas as pd, numpy as np, warnings
 warnings.filterwarnings("ignore")
 x620_p, merged_p = sys.argv[1], sys.argv[2]
 
+MISSING = {"", "nan", "none", "-", "?", "na", "n/a"}
+
 def canon(v):
+    # Must handle float NaN explicitly: pandas Series.map() does not pass NaN
+    # to the callable, so relying on str(v) == "nan" silently leaves missing
+    # targets in place and inflates every pairwise distance. Kept identical to
+    # scripts/dist_all.py so both distance tables agree.
+    if v is None: return None
+    if isinstance(v, float) and np.isnan(v): return None
     s = str(v).strip()
-    if s in ("", "nan", "None", "-", "?"): return None
+    if s.lower() in MISSING: return None
     m = re.fullmatch(r"(\d+)\.0+", s)
-    if m: return m.group(1)
-    return s
+    return m.group(1) if m else s
+
+vcanon = np.vectorize(canon, otypes=[object])
 
 # --- discovery export ---
 x = pd.read_excel(x620_p, dtype=str)
@@ -36,13 +45,11 @@ print("only in merged (sample):", onlyM)
 # LNZR-1 reference vector over shared targets
 r = x.loc[x[sid620] == "GCA_000712995.1"]
 assert len(r) == 1
-ref = np.array([canon(r.iloc[0][t620[t]]) for t in shared], dtype=object)
+ref = vcanon(np.array([r.iloc[0][t620[t]] for t in shared], dtype=object))
 
 ids  = m[sidM].astype(str).to_numpy()
-st   = m["ST_(S._capitis_MLST)"].map(canon).to_numpy()
-E    = np.empty((len(m), len(shared)), dtype=object)
-for j, t in enumerate(shared):
-    E[:, j] = m[tM[t]].map(canon).to_numpy()
+st   = vcanon(m["ST_(S._capitis_MLST)"].to_numpy(dtype=object))
+E    = vcanon(m[[tM[t] for t in shared]].to_numpy(dtype=object))
 
 rows = []
 for i in range(len(ids)):
